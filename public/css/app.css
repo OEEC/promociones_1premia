@@ -1,0 +1,83 @@
+/*
+Prmary color: #CA0000
+Secondary color: #000000
+Terceary color: #D6A5A5
+fourth color: #850000
+fifth color: #ED3B3B
+sixth color: #353333
+*/
+
+/* Cambiar el fondo de la página */
+body {
+    background-color: #353333; /* Negro */
+    color: #000; /* Blanco */
+}
+
+/* Personalizar la barra de navegación */
+.navbar {
+    background-color: #000; /* Negro */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #CA0000 !important; /* Rojo Bootstrap */
+    font-weight: bold;
+}
+
+.navbar-brand:hover {
+    color: #FFF !important; /* Blanco al pasar el ratón */
+}
+
+/* Personalizar contenedor principal */
+.container {
+    background-color: #b8a8a8; /* Negro más oscuro */
+    border: 1px solid #ED3B3B; /* Bordes rojos */
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px hsl(0, 100%, 26%); /* Sombra roja */
+}
+
+/* Botones personalizados */
+.btn-custom {
+    background-color: #ED3B3B; /* Rojo */
+    color: #FFF; /* Blanco */
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #FFF; /* Blanco */
+    color: #ED3B3B; /* Rojo */
+    border: 1px solid #ED3B3B;
+}
+
+/* Enlaces */
+a {
+    color: #CA0000;
+}
+
+a:hover {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.nav-link{
+    background-color: #CA0000 !important;
+    color: #fff; /* Blanco para el texto */
+    border-radius: 0% !important;
+}
+/* Efecto hover para cada nav-item */
+.nav-pills .nav-link {
+    transition: background-color 0.3s, color 0.3s !important; /* Suaviza el cambio de color */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #850000 !important; /* Rojo oscuro para hover */
+    color: #fff; /* Blanco para el texto */
+    
+}
+
+/** Estilos Canje de promociones***/
+
+.color-encabezado {
+    color: #850000;
+}
