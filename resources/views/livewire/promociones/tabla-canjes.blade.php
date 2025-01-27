@@ -9,7 +9,7 @@
                 <tr>
                     <th class="bg-dark text-white" scope="col">#</th>
                     <th class="bg-dark text-white" scope="col">Promoción</th>
-                    <th class="bg-dark text-white" scope="col">Empleado</th>
+                    <th class="bg-dark text-white" scope="col">Quien realizó</th>
                     <th class="bg-dark text-white" scope="col">Tienda</th>
                     <th class="bg-dark text-white" scope="col">Fecha de Canje</th>
                 </tr>
@@ -19,8 +19,8 @@
                     <tr>
                         <th scope="row">{{ $loop->index + 1}}</th>
                         <td>{{ $canje->promocion->nombre }}</td>
-                        <td>{{ $canje->empleado->persona->nombre }}  {{ $canje->empleado->persona->apellido_paterno }}</td>
-                        <td>{{ $canje->tienda->nombre }}</td>
+                        <td>{{ $canje->empleado->persona->nombre ?? ' ' }}  {{ $canje->empleado->persona->apellido_paterno ?? ' '}}</td>
+                        <td>{{ $canje->tienda->nombre ?? ' ' }}</td>
                         <td>{{ $canje->created_at }}</td>
                     </tr>
                 @endforeach

@@ -15,7 +15,6 @@
             </div>
             <hr class="border border-danger border-2 opacity-50">
             @if ($cargarTabla)
-
                 <h3 class="color-encabezado"><b>Promociones Disponibles</b></h3>
                 <select wire:model="promocionSeleccionada">
                     <option value="">Selecciona una promoción</option>

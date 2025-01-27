@@ -25,15 +25,15 @@ class CanjePromociones extends Component
     // Busca Cliente por numero de tarjeta
     public function buscarCliente()
     {
-        
         // Busca el cliente por el numero de tarjeta
         $cliente = Cliente::where('no_tarjeta', $this->noTarjeta)->first();
-        if (!$cliente) {
+        if (is_null($cliente)) {
             session()->flash('error', 'Cliente no encontrado.');
+        } else {
+            $this->clienteId = $cliente->id;
+            $this->cargarTabla = true;
+            $this->dispatch('refreshTablaCanjes', clienteId: $this->clienteId);
         }  
-
-        $this->clienteId = $cliente->id;
-        $this->cargarTabla = true;
     }
 
     // Canjea promocion
@@ -46,24 +46,30 @@ class CanjePromociones extends Component
 
         // Busca el cliente por el numero de tarjeta
         $cliente = Cliente::where('no_tarjeta', $this->noTarjeta)->first();
-        if (!$cliente) {
+        if (is_null($cliente)) {
             session()->flash('error', 'Cliente no encontrado.');
             return;
         }
         
         $empleado = Auth::user()->empleado;
+        if (is_null($empleado)) {
+            session()->flash('error', 'Empleado no encontrado.');
+            return;
+        }
 
-        Canje::create([
-            'cliente_id' => $cliente->id,
-            'promocion_id' => $this->promocionSeleccionada,
-            'empleado_id' => $empleado->id,
-            'tienda_id' => $empleado->tienda_id,
-             'estatus' => 1,
-            'fecha_canje' => now(),
-        ]);
-
-        $this->buscarCliente($this->noTarjeta); // Actualizar datos
-        session()->flash('success', 'Promoción canjeada exitosamente.');
+        $canje = new Canje();
+        $canje->promocion_id = $this->promocionSeleccionada;
+        $canje->cliente_id = $cliente->id;
+        $canje->empleado_id = $empleado->id;
+        $canje->tienda_id = $empleado->tienda_id;
+        $canje->estatus = 1;
+        if ($canje->save()) {
+            $this->buscarCliente(); // Actualizar datos
+            session()->flash('success', 'Promoción canjeada exitosamente.');
+            $this->dispatch('refreshTablaCanjes', clienteId: $this->clienteId);
+        } else {
+            session()->flash('error', 'Error al canjear la promoción.');
+        }
     }
 
     // Obtiene promociones activas
@@ -71,6 +77,7 @@ class CanjePromociones extends Component
     {
         $this->promocionesActivas = Promocion::where('fecha_vigencia', '>=', now())->get();
     }
+
     public function render()
     {
         return view('livewire.promociones.canje-promociones');

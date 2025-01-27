@@ -51,7 +51,7 @@
             <a class="nav-link active bg-danger text-white" aria-current="page" href="/tienda">Canjear promocion</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-danger text-white" href="#">Historial</a>
+            <a class="nav-link bg-danger text-white" href="/historial-tienda">Historial</a>
         </li>
         <li class="nav-item">
             <a class="nav-link bg-danger text-white" href="#">Promociones</a>

@@ -31,6 +31,10 @@ Route::get('/administrador', function () {
 Route::get('/tienda', function () {
     return view('tienda');
 })->name('canjes')->middleware(['auth', 'role:1']); // Middleware para empleados
+Route::get('/historial-tienda', function () {
+    return view('historial-tienda');
+})->name('historial-tienda')->middleware(['auth', 'role:1']); // Middleware para empleados
+
 
 // Logout
 Route::post('/logout', function () {
