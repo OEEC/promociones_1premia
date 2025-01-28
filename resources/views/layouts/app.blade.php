@@ -54,7 +54,7 @@
             <a class="nav-link bg-danger text-white" href="/historial-tienda">Historial</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-danger text-white" href="#">Promociones</a>
+            <a class="nav-link bg-danger text-white" href="/promociones-tienda">Promociones</a>
         </li>
     </ul>
     @endif

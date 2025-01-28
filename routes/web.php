@@ -33,7 +33,11 @@ Route::get('/tienda', function () {
 })->name('canjes')->middleware(['auth', 'role:1']); // Middleware para empleados
 Route::get('/historial-tienda', function () {
     return view('historial-tienda');
-})->name('historial-tienda')->middleware(['auth', 'role:1']); // Middleware para empleados
+})->name('historial-tienda')->middleware(['auth', 'role:1']);
+Route::get('/promociones-tienda', function () {
+    return view('promociones-tienda');
+})->name('promociones-tienda')->middleware(['auth', 'role:1']); // Middleware para empleados
+
 
 
 // Logout
