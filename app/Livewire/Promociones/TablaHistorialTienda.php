@@ -82,7 +82,7 @@ class TablaHistorialTienda extends Component
             $query->where('tienda_id', $this->tienda);
         }
 
-        $this->promocionesCanjeadas = $query->with(['promocion', 'empleado.persona', 'tienda', 'cliente.persona'])->get();
+        $this->promocionesCanjeadas = $query->with(['promocion', 'empleado.persona', 'tienda', 'cliente.persona'])->orderBy('created_at', 'desc')->get();
     }
 
     public function limpiarFiltros()
