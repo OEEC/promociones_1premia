@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class CanjePromociones extends Component
 {
     public $noTarjeta;
+    public $nombreCliente;
     public $promocionesCanjeadas = [];
     public $promocionesActivas = [];
     public $promocionSeleccionada;
@@ -22,35 +23,42 @@ class CanjePromociones extends Component
         $this->promocionesActivas();
     }
 
-    // Busca Cliente por numero de tarjeta
+    // Busca Cliente por numero de tarjeta o nombre
     public function buscarCliente()
     {
-        // Busca el cliente por el numero de tarjeta
-        $cliente = Cliente::where('no_tarjeta', $this->noTarjeta)->first();
+        $cliente = null;
+
+        if ($this->noTarjeta) {
+            $cliente = Cliente::where('no_tarjeta', $this->noTarjeta)->first();
+        } elseif ($this->nombreCliente) {
+            $cliente = Cliente::whereHas('persona', function ($query) {
+                $query->where('nombre_completo', 'like', '%' . $this->nombreCliente . '%');
+            })->first();
+        }
+
         if (is_null($cliente)) {
             session()->flash('error', 'Cliente no encontrado.');
         } else {
             $this->clienteId = $cliente->id;
             $this->cargarTabla = true;
             $this->dispatch('refreshTablaCanjes', clienteId: $this->clienteId);
-        }  
+        }
     }
 
     // Canjea promocion
     public function canjearPromocion()
     {
-        if (!$this->noTarjeta || !$this->promocionSeleccionada) {
-            session()->flash('error', 'Selecciona un cliente y una promoción.');
+        if (!$this->noTarjeta && !$this->nombreCliente) {
+            session()->flash('error', 'Selecciona un cliente.');
             return;
         }
 
-        // Busca el cliente por el numero de tarjeta
-        $cliente = Cliente::where('no_tarjeta', $this->noTarjeta)->first();
+        $cliente = Cliente::find($this->clienteId);
         if (is_null($cliente)) {
             session()->flash('error', 'Cliente no encontrado.');
             return;
         }
-        
+
         $empleado = Auth::user()->empleado;
         if (is_null($empleado)) {
             session()->flash('error', 'Empleado no encontrado.');
@@ -71,6 +79,7 @@ class CanjePromociones extends Component
             session()->flash('error', 'Error al canjear la promoción.');
         }
     }
+
 
     // Obtiene promociones activas
     public function promocionesActivas()

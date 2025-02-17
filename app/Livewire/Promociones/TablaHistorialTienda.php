@@ -60,9 +60,7 @@ class TablaHistorialTienda extends Component
 
         if ($this->nombre_cliente) {
             $query->whereHas('cliente.persona', function ($q) {
-                $q->where('nombre', 'like', '%' . $this->nombre_cliente . '%')
-                  ->orWhere('apellido_paterno', 'like', '%' . $this->nombre_cliente . '%')
-                  ->orWhere('apellido_materno', 'like', '%' . $this->nombre_cliente . '%');
+                $q->where('nombre_completo', 'like', '%' . $this->nombre_cliente . '%');
             });
         }
 
@@ -72,9 +70,7 @@ class TablaHistorialTienda extends Component
 
         if ($this->empleado) {
             $query->whereHas('empleado.persona', function ($q) {
-                $q->where('nombre', 'like', '%' . $this->empleado . '%')
-                  ->orWhere('apellido_paterno', 'like', '%' . $this->empleado . '%')
-                  ->orWhere('apellido_materno', 'like', '%' . $this->empleado . '%');
+                $q->where('nombre_completo', 'like', '%' . $this->empleado . '%');
             });
         }
 

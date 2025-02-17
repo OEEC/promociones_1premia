@@ -6,6 +6,7 @@
     <title>{{ config('app.name') }}</title>
     <!-- Bootstrap CSS (CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Estilos personalizados -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="icon" href="https://1premia.com.mx/wp-content/uploads/2022/02/cropped-uno_prima_icon-32x32.png" sizes="32x32" />
@@ -34,17 +35,17 @@
 </nav>
 @auth
     @if(auth()->user()->isAdmin())
-        <ul class="nav justify-content-center bg-danger">
-            <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="#">Usuarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">Prmociones</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">Tiendas</a>
-            </li>
-        </ul>
+    <ul class="nav nav-pills nav-fill bg-danger">
+        <li class="nav-item">
+            <a class="nav-link active bg-danger text-white" aria-current="page" href="/usuarios">Usuarios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-danger text-white" href="/admin-tiendas">Tiendas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-danger text-white" href="/admin-promociones">Promociones</a>
+        </li>
+    </ul>
     @elseif(auth()->user()->isUser())
     <ul class="nav nav-pills nav-fill bg-danger">
         <li class="nav-item">

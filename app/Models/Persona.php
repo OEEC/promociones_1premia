@@ -10,6 +10,17 @@ class Persona extends Model
     use HasFactory;
     protected $table = 'personas';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'nombre_completo',
+        'fecha_nacimiento',
+        'cp',
+    ];
+
     public function empleado()
     {
         return $this->hasOne(Empleado::class);

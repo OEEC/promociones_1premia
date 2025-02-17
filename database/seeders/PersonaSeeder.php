@@ -15,21 +15,11 @@ class PersonaSeeder extends Seeder
     public function run(): void
     {
         DB::table('personas')->insert([
-            'nombre' => 'OSCAR ENRIQUE',
-            'apellido_paterno' => 'ESCOBAR',
-            'apellido_materno' => 'DE LA CRUZ',
+            'nombre_completo' => 'OSCAR ENRIQUE ESCOBAR DE LA CRUZ',
             'fecha_nacimiento' => Carbon::parse('1990-01-01'),
             'cp' => 27000,
             'created_at' =>  Carbon::now(),
         ]);
 
-        DB::table('personas')->insert([
-            'nombre' => 'OMAR',
-            'apellido_paterno' => 'GOMEZ',
-            'apellido_materno' => 'VAQUERA',
-            'fecha_nacimiento' => Carbon::parse('1990-11-11'),
-            'cp' => 27000,
-            'created_at' =>  Carbon::now(),
-        ]);
     }
 }

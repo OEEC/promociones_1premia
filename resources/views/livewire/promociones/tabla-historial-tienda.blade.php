@@ -21,9 +21,9 @@
                         <th scope="row">{{ $loop->index + 1 }}</th>
                         <td>{{ $canje->created_at }}</td>
                         <td>{{ $canje->cliente->no_tarjeta }}</td>
-                        <td>{{ $canje->cliente->persona->nombre }} {{ $canje->cliente->persona->apellido_paterno }} {{ $canje->cliente->persona->apellido_materno }}</td>
+                        <td>{{ $canje->cliente->persona->nombre_completo }}</td>
                         <td>{{ $canje->promocion->nombre }}</td>
-                        <td>{{ $canje->empleado->persona->nombre }} {{ $canje->empleado->persona->apellido_paterno }} {{ $canje->empleado->persona->apellido_materno }}</td>
+                        <td>{{ $canje->empleado->persona->nombre_completo }}</td>
                         <td>{{ $canje->tienda->nombre }}</td>
                     </tr>
                 @endforeach
