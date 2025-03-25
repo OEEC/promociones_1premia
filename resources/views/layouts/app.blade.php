@@ -50,13 +50,13 @@
     @elseif(auth()->user()->isUser())
     <ul class="nav nav-pills nav-fill bg-danger">
         <li class="nav-item">
-            <a class="nav-link active bg-danger text-white" aria-current="page" href="/tienda">Canjear promocion</a>
+            <a class="nav-link active bg-danger text-white" aria-current="page" href="/tienda"><i class="bi bi-stars"></i> Canjear promocion</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-danger text-white" href="/historial-tienda">Historial</a>
+            <a class="nav-link bg-danger text-white" href="/historial-tienda"><i class="bi bi-clock-history"></i> Historial</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-danger text-white" href="/promociones-tienda">Promociones</a>
+            <a class="nav-link bg-danger text-white" href="/promociones-tienda"><i class="bi bi-percent"></i> Promociones</a>
         </li>
     </ul>
     @endif

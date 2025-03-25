@@ -1,5 +1,5 @@
 <div>
-    <h3 class="color-encabezado"><b>LISTADO DE PROMOCIÓNES</b></h3>
+    <h3 class="color-encabezado"><b><i class="bi bi-list-stars"></i> LISTADO DE PROMOCIÓNES</b></h3>
     @if ($promociones->isEmpty())
         <p>No hay promociones</p>
     @else

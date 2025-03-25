@@ -1,5 +1,5 @@
 <div>
-    <h3 class="color-encabezado"><b>Historial de Promociones Canjeadas</b></h3>
+    <h3 class="color-encabezado"><b><i class="bi bi-list-stars"></i> Historial de Promociones Canjeadas</b></h3>
     @if ($promocionesCanjeadas->isEmpty())
         <p>No hay promociones canjeadas.</p>
     @else

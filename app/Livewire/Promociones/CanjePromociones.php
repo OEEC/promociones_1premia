@@ -65,6 +65,11 @@ class CanjePromociones extends Component
             return;
         }
 
+        if ($this->promocionSeleccionada == null or $this->promocionSeleccionada == '') {
+            session()->flash('error', 'Promocion no seleccionada.');
+            return;
+        }
+
         $canje = new Canje();
         $canje->promocion_id = $this->promocionSeleccionada;
         $canje->cliente_id = $cliente->id;
