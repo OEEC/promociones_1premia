@@ -9,18 +9,21 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
+                    <i class="bi bi-person-fill"></i>
                     <label>Nombre de Usuario:</label>
                     <input type="text" class="form-control" wire:model="name">
                     @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 
                 <div class="mb-3">
+                    <i class="bi bi-asterisk"></i>
                     <label>Contraseña:</label>
                     <input type="password" class="form-control" wire:model="password">
                     @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="mb-3">
+                    <i class="bi bi-envelope-at-fill"></i>
                     <label>Email:</label>
                     <input type="email" class="form-control" wire:model="email">
                     @error('email') <span class="text-danger">{{ $message }}</span> @enderror
@@ -28,12 +31,13 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
+                    <i class="bi bi-person-standing"></i>
                     <label>Nombre completo empleado:</label>
                     <input type="texto" class="form-control" wire:model="nombreCompleto">
                     @error('nombreCompleto') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
-
                 <div class="mb-3">
+                    <i class="bi bi-person-badge"></i>
                     <label>Rol:</label>
                     <select class="form-control" wire:model="role">
                         <option value="">Selecciona un rol</option>
@@ -43,6 +47,7 @@
                     @error('role') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-3">
+                        <i class="bi bi-shop"></i>
                         <label>Tiendas:</label>
                         <select wire:model="tiendaid" class="form-control mb-2">
                             <option value="">Selecciona una tienda</option>
@@ -55,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Crear Usuario</button>
 
     </form>
 

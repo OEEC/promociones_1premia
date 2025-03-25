@@ -81,3 +81,8 @@ a:hover {
 .color-encabezado {
     color: #850000;
 }
+
+.ph {
+    height: 200px !important;
+    width: 50% !important;
+}

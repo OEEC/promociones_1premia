@@ -9,11 +9,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
+                    <i class="bi bi-pencil-fill"></i>
                     <label for="nombre"  class="form-label">Nombre:</label>
                     <input type="text" class="form-control" wire:model="nombre" placeholder="Nombre de la promoción">
                     @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-3">
+                    <i class="bi bi-image-fill"></i>
                     <label for="imagen" class="form-label">Imagen:</label>
                     <input class="form-control" type="file" id="imagen" wire:model="imagen">
                     @error('imagen') <span class="text-danger">{{ $message }}</span> @enderror
@@ -21,11 +23,13 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
+                    <i class="bi bi-calendar4-week"></i>
                     <label for="fecha_vigencia"  class="form-label">Fecha vigencia:</label>
                     <input type="date" id="fecha_vigencia" wire:model.defer="fecha_vigencia" class="form-control">
                     @error('fecha_vigencia') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-3">
+                    <i class="bi bi-gear-fill"></i>
                     <label for="estatus"  class="form-label">Estatus:</label>
                     <select class="form-control" wire:model="estatus">
                         <option value="2">Selecciona un estatus</option>
@@ -36,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Crear Tiendas</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Crear Tiendas</button>
     </form>
     <hr>
     

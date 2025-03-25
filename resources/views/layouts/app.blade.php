@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS (CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     <!-- Estilos personalizados -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="icon" href="https://1premia.com.mx/wp-content/uploads/2022/02/cropped-uno_prima_icon-32x32.png" sizes="32x32" />
@@ -37,13 +38,13 @@
     @if(auth()->user()->isAdmin())
     <ul class="nav nav-pills nav-fill bg-danger">
         <li class="nav-item">
-            <a class="nav-link active bg-danger text-white" aria-current="page" href="/usuarios">Usuarios</a>
+            <a class="nav-link active bg-danger text-white" aria-current="page" href="/usuarios"><i class="bi bi-people-fill"></i> Usuarios</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-danger text-white" href="/admin-tiendas">Tiendas</a>
+            <a class="nav-link bg-danger text-white" href="/admin-tiendas"><i class="bi bi-shop-window"></i> Tiendas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-danger text-white" href="/admin-promociones">Promociones</a>
+            <a class="nav-link bg-danger text-white" href="/admin-promociones"><i class="bi bi-percent"></i> Promociones</a>
         </li>
     </ul>
     @elseif(auth()->user()->isUser())

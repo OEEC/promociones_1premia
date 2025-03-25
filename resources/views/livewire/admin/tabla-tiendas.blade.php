@@ -25,13 +25,16 @@
                     <td>
                         @if ($tienda->trashed())
                             <button wire:click="restaurarTienda({{ $tienda->id }})" class="btn btn-success btn-sm">
+                                <i class="bi bi-plus"></i>
                                 Restaurar
                             </button>
                         @else
                             <button wire:click="eliminarTienda({{ $tienda->id }})" class="btn btn-danger btn-sm">
+                                <i class="bi bi-dash"></i>
                                 Eliminar
                             </button>
                             <button wire:click="editarTienda({{ $tienda->id }})" class="btn btn-primary btn-sm">
+                                <i class="bi bi-arrow-clockwise"></i>
                                 Editar
                             </button>
                         @endif
@@ -51,23 +54,26 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Editar Usuario</h5>
+                        <h5 class="modal-title">Editar Tienda</h5>
                         <button type="button" class="close" wire:click="$set('showEditModal', false)">
                             &times;
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <i class="bi bi-shop"></i>
                             <label>Nombre:</label>
                             <input type="text" class="form-control" wire:model="name">
                             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
+                            <i class="bi bi-geo-alt-fill"></i>
                             <label>Dirección:</label>
                             <input type="text" class="form-control" wire:model="direccion">
                             @error('direccion') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
+                            <i class="bi bi-pin-map"></i>
                             <label>Zonas:</label>
                             <select wire:model="zona" class="form-control mb-2">
                                 <option value="">Selecciona una zona</option>
@@ -78,6 +84,7 @@
                             @error('zona') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
+                            <i class="bi bi-gear-fill"></i>
                             <label>Estatus:</label>
                             <select class="form-control" wire:model="estatus">
                                 <option value="2">Selecciona un rol</option>
@@ -88,8 +95,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click="$set('showEditModal', false)">Cerrar</button>
-                        <button type="button" class="btn btn-success" wire:click="actualizarUsuario">Guardar cambios</button>
+                        <button type="button" class="btn btn-secondary" wire:click="$set('showEditModal', false)"><i class="bi bi-x"></i> Cerrar</button>
+                        <button type="button" class="btn btn-success" wire:click="actualizarUsuario"><i class="bi bi-save-fill"></i> Guardar cambios</button>
                     </div>
                 </div>
             </div>
