@@ -8,9 +8,10 @@
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
-                <th>imagen</th>
-                <th>fecha vigencia</th>
-                <th>Estatus</th>
+                <th>Imagen</th>
+                <th>Fecha vigencia</th>
+                <th>Estatus vigencia</th>
+                <th>Estatus Promocion</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -21,6 +22,15 @@
                     <td>{{ $promocion->nombre }}</td>
                     <td>{{ $promocion->imagen ?? '' }}</td>
                     <td>{{ $promocion->fecha_vigencia }}</td>
+                    <td>
+                        @if (\Carbon\Carbon::parse($promocion->fecha_vigencia)->isToday())
+                            <span class="text-warning">Por caducar</span>
+                        @elseif(\Carbon\Carbon::parse($promocion->fecha_vigencia)->isFuture())
+                            <span class="text-success">Vigente</span>
+                        @else
+                            <span class="text-danger">Caducada</span>
+                        @endif
+                    </td>
                     <td>{{ $promocion->trashed() ? 'Eliminado' : 'Activo' }}</td>
                     <td>
                         @if ($promocion->trashed())
@@ -64,27 +74,27 @@
                         </div>
                         <div class="form-group">
                             <label for="imagen" class="form-label">Imagen</label>
-                            <input class="form-control" type="file" id="imagen" wire:model="imagen" placeholder="Selecciona una imagen">
-                            @error('imagen') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input class="form-control" type="file" id="img_promo" wire:model="img_promo" placeholder="Selecciona una imagen">
+                            @error('img_promo') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label for="fecha_vigencia">Fecha vigencia</label>
-                            <input type="date" id="fecha_vigencia" wire:model.defer="fecha_vigencia" class="form-control">
-                            @error('fecha_vigencia') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="date" id="fecha_vigencia_promo" wire:model.defer="fecha_vigencia_promo" class="form-control">
+                            @error('fecha_vigencia_promo') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label>Estatus:</label>
-                            <select class="form-control" wire:model="estatus">
-                                <option value="2">Selecciona esttaus</option>
-                                <option value="0">Activa</option>
-                                <option value="1">Inhabilitada</option>
+                            <select class="form-control" wire:model="estatus_promo">
+                                <option value="2">Selecciona estaus</option>
+                                <option value="1">Activa</option>
+                                <option value="0">Inhabilitada</option>
                             </select>
                             @error('estatus') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click="$set('showEditModal', false)">Cerrar</button>
-                        <button type="button" class="btn btn-success" wire:click="actualizarUsuario">Guardar cambios</button>
+                        <button type="button" class="btn btn-success" wire:click="actualizarPromocion">Guardar cambios</button>
                     </div>
                 </div>
             </div>

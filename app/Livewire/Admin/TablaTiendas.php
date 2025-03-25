@@ -55,7 +55,7 @@ class TablaTiendas extends Component
             'direccion' => 'required|string|max:255',
         ]);
 
-        $tienda = Tienda::findOrFail($this->userId);
+        $tienda = Tienda::findOrFail($this->tiendaId);
         $tienda->nombre = $this->name;
         $tienda->direccion = $this->direccion;
         $tienda->zona_id = $this->zona;

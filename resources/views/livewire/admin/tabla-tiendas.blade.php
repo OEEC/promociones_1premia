@@ -48,7 +48,7 @@
         {{ $tiendas->links() }}
     </div>
 
-    <!-- Modal para Editar Usuario -->
+    <!-- Modal para Editar Estacion -->
     @if($showEditModal)
         <div class="modal fade show d-block" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -83,20 +83,10 @@
                             </select>
                             @error('zona') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
-                        <div class="form-group">
-                            <i class="bi bi-gear-fill"></i>
-                            <label>Estatus:</label>
-                            <select class="form-control" wire:model="estatus">
-                                <option value="2">Selecciona un rol</option>
-                                <option value="0">Activa</option>
-                                <option value="1">Inhabilitada</option>
-                            </select>
-                            @error('estatus') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click="$set('showEditModal', false)"><i class="bi bi-x"></i> Cerrar</button>
-                        <button type="button" class="btn btn-success" wire:click="actualizarUsuario"><i class="bi bi-save-fill"></i> Guardar cambios</button>
+                        <button type="button" class="btn btn-success" wire:click="actualizarTienda"><i class="bi bi-save-fill"></i> Guardar cambios</button>
                     </div>
                 </div>
             </div>

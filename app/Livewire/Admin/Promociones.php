@@ -29,7 +29,7 @@ class Promociones extends Component
             'estatus' => 1,
         ]);
 
-        session()->flash('success', 'Tienda creada correctamente.');
+        session()->flash('success', 'Promoción creada correctamente.');
         $this->reset(['nombre', 'imagen', 'fecha_vigencia']);
         $this->dispatch('refreshTablaPromociones');
     }

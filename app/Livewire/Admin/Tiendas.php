@@ -38,7 +38,7 @@ class Tiendas extends Component
         ]);
 
         session()->flash('success', 'Tienda creada correctamente.');
-        $this->reset(['name', 'direccion', 'zona_id','estatus']);
+        $this->reset(['name', 'direccion', 'zona','estatus']);
         $this->dispatch('refreshTablaTiendas');
     }
 

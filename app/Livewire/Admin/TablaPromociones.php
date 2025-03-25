@@ -46,24 +46,24 @@ class TablaPromociones extends Component
     {
         $this->validate([
             'nombre_promo' => 'required|string|max:255',
-            'img_promo' => 'required|string|max:255',
+            'fecha_vigencia_promo' => 'required|date|after_or_equal:today',
         ]);
 
-        $Promocion = Promocion::findOrFail($this->userId);
+        $Promocion = Promocion::findOrFail($this->promocionId);
         $Promocion->nombre = $this->nombre_promo;
         $Promocion->imagen = $this->img_promo;
-        $Promocion->fecha_vigente = $this->fecha_vigencia_promo;
+        $Promocion->fecha_vigencia = $this->fecha_vigencia_promo;
         $Promocion->estatus = $this->estatus_promo;
         $Promocion->save();
 
         session()->flash('success', 'Promocion actualizada correctamente.');
-        $this->reset(['showEditModal', 'PromocionId', 'nombre_promo', 'img_promo']); // Resetear datos
+        $this->reset(['showEditModal', 'promocionId', 'nombre_promo', 'img_promo']); // Resetear datos
     }
 
     public function render()
     {
         return view('livewire.admin.tabla-promociones', [
-            'promociones' => Promocion::withTrashed()->paginate(10) // Carga usuarios con SoftDeletes
+            'promociones' => Promocion::withTrashed()->paginate(10) // Carga promociones con SoftDeletes
         ]);
     }
 }

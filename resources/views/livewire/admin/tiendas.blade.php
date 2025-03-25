@@ -33,16 +33,6 @@
                         </select>
                     @error('zona') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
-                <div class="mb-3">
-                    <i class="bi bi-gear-fill"></i>
-                    <label>Estatus:</label>
-                    <select class="form-control" wire:model="estatus">
-                        <option value="2">Selecciona un rol</option>
-                        <option value="0">Activa</option>
-                        <option value="1">Inhabilitada</option>
-                    </select>
-                    @error('estatus') <span class="text-danger">{{ $message }}</span> @enderror
-                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Crear Tiendas</button>

@@ -48,17 +48,22 @@ class TablaUsuarios extends Component
         $this->nombre = $usuario->name;
         $this->correo = $usuario->email;
         $this->nombreCompleto = $usuario->empleado->persona->nombre_completo ?? '';
-        $this->tienda_id = $usuario->empleado->tienda_id;
+        $this->tienda_id = $usuario->empleado->tienda_id ?? '';
         $this->role = $usuario->role;
         $this->showEditModal = true; // Mostrar el modal de edición
     }
 
     public function actualizarUsuario()
     {
+        if($this->new_password != ''){
+            $this->validate([
+                'password' => 'required|min:8'
+            ]);
+
+        }
         $this->validate([
             'nombre' => 'required|string|max:255',
             'nombreCompleto' => 'required|string|max:255',
-            'password' => 'nullable|min:8'
         ]);
 
         $usuario = User::findOrFail($this->userId);

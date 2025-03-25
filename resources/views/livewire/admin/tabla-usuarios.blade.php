@@ -24,7 +24,7 @@
                     <td>{{ $usuario->email }}</td>
                     <td>{{ $usuario->empleado->persona->nombre_completo ?? '' }}</td>
                     <td>{{ $usuario->trashed() ? 'Eliminado' : 'Activo' }}</td>
-                    <td>{{ $usuario->role ? 'Administrativo' : 'Tienda' }}</td>
+                    <td>{{ $usuario->role == 0 ? 'Administrativo' : 'Tienda' }}</td>
                     <td>{{ $usuario->empleado->tienda->nombre ?? '' }}</td>
                     <td>
                         @if ($usuario->trashed())
