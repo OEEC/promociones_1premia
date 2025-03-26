@@ -31,7 +31,7 @@
                             <span class="text-danger">Caducada</span>
                         @endif
                     </td>
-                    <td>{{ $promocion->trashed() ? 'Eliminado' : 'Activo' }}</td>
+                    <td>{{ $promocion->trashed() ? 'Inhabilitada' : 'Activa' }}</td>
                     <td>
                         @if ($promocion->trashed())
                             <button wire:click="restaurarPromocion({{ $promocion->id }})" class="btn btn-success btn-sm">
