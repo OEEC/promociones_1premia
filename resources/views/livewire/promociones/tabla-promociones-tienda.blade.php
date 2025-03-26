@@ -20,15 +20,19 @@
                         <td>{{ $promo->nombre }}</td>
                         <td>{{ $promo->fecha_vigencia }}</td>
                         <td>
-                            @if (\Carbon\Carbon::parse($promocion->fecha_vigencia)->isToday())
-                                <span class="text-warning">Por caducar</span>
-                            @elseif(\Carbon\Carbon::parse($promocion->fecha_vigencia)->isFuture())
-                                <span class="text-success">Vigente</span>
+                            @if($promo?->fecha_vigencia)
+                                @if (\Carbon\Carbon::parse($promo->fecha_vigencia)->isToday())
+                                    <span class="text-warning">Por caducar</span>
+                                @elseif(\Carbon\Carbon::parse($promo->fecha_vigencia)->isFuture())
+                                    <span class="text-success">Vigente</span>
+                                @else
+                                    <span class="text-danger">Caducada</span>
+                                @endif
                             @else
-                                <span class="text-danger">Caducada</span>
+                                <span class="text-danger">N/A</span>
                             @endif
                         </td>
-                        <td>{{ $promo->estatus ? 'Inhabilitada' : 'Activa' }}</td>
+                        <td>{{ $promo->estatus ? 'Activa' : 'Inhabilitada' }}</td>
                     </tr>
                 @endforeach
             </tbody>
