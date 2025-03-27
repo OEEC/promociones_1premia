@@ -54,11 +54,7 @@ Route::get('/promociones-tienda', function () {
 
 
 // Logout
-Route::post('/logout', function () {
+Route::match(['get', 'post'], '/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
-
-Route::get('/session-expired', function () {
-    return redirect()->route('logout');
-})->name('session.expired');
