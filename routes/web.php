@@ -58,3 +58,7 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+
+Route::get('/session-expired', function () {
+    return redirect()->route('logout');
+})->name('session.expired');
