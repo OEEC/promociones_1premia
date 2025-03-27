@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('login-inicio');
 });
 
+Route::get('/login-inicio', function () {
+    return view('login-inicio');
+});
+
 // Login para invitados
 Route::get('/login', Login::class)->name('login')->middleware('guest');
 
