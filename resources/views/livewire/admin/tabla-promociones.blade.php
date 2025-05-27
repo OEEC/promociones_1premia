@@ -12,6 +12,8 @@
                 <th>Fecha vigencia</th>
                 <th>Estatus vigencia</th>
                 <th>Estatus Promocion</th>
+                <th>Dias valida</th>
+                <th>Horario</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -33,6 +35,19 @@
                     </td>
                     <td>{{ $promocion->trashed() ? 'Inhabilitada' : 'Activa' }}</td>
                     <td>
+                        @php
+                            $dias = json_decode($promocion->dias_aplicables, true);
+                        @endphp
+
+                        @if (!empty($dias))
+                            {{ implode(', ', $dias) }}
+                        @else
+                            Sin dias aplicables
+                        @endif
+                    </td>
+                    <td>{{ $promocion->hora_inicio ? \Carbon\Carbon::parse($promocion->hora_inicio)->format('H:i') : '' }} - 
+                        {{ $promocion->hora_fin ?\Carbon\Carbon::parse($promocion->hora_fin)->format('H:i') : ''  }}</td>
+                    <td>
                         @if ($promocion->trashed())
                             <button wire:click="restaurarPromocion({{ $promocion->id }})" class="btn btn-success btn-sm">
                                 Restaurar
@@ -45,6 +60,7 @@
                                 Editar
                             </button>
                         @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -89,6 +105,37 @@
                                 <option value="1">Activa</option>
                                 <option value="0">Inhabilitada</option>
                             </select>
+                            @error('estatus') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"><i class="bi bi-calendar-check"></i> Días aplicables:</label>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach($diasSemana as $dia)
+                                    <div class="form-check">
+                                        @if ()
+                                            
+                                        @endif
+                                        <input type="checkbox" id="dia-{{ $dia }}" value="{{ $dia }}" wire:model="dias_aplicables" class="form-check-input">
+                                        <label class="form-check-label" for="dia-{{ $dia }}">{{ $dia }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @error('estatus') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label for="hora_inicio" class="form-label"><i class="bi bi-clock"></i> Hora de inicio:</label>
+                                <input type="time" class="form-control" id="hora_inicio" wire:model="hora_inicio_promo">
+                                @error('hora_inicio') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            @error('estatus') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label for="hora_fin" class="form-label"><i class="bi bi-clock-fill"></i> Hora de fin:</label>
+                                <input type="time" class="form-control" id="hora_fin" wire:model="hora_fin_promo">
+                                @error('hora_fin') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
                             @error('estatus') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>

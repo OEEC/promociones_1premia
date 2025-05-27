@@ -15,6 +15,9 @@ class Promocion extends Model
         'imagen',
         'fecha_vigencia',
         'estatus',
+        'dias_aplicables',
+        'hora_inicio',
+        'hora_fin',
     ];
     
     public function canjes()
