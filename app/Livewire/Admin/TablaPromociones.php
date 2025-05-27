@@ -10,8 +10,17 @@ class TablaPromociones extends Component
 {
     use WithPagination;
 
-    public $promocionId, $nombre_promo, $img_promo, $fecha_vigencia_promo, $estatus_promo;
+    public $promocionId, $nombre_promo, $img_promo, $fecha_vigencia_promo, $estatus_promo, $hora_inicio_promo, $hora_fin_promo, $dias_aplicables_promo;
     public $showEditModal = false;
+    public $diasSemana = [
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sábado',
+        'Domingo',
+    ];
 
     protected $listeners = ['refreshTablaPromociones' => '$refresh'];
 
@@ -39,6 +48,9 @@ class TablaPromociones extends Component
         $this->img_promo = $Promocion->imagen;
         $this->fecha_vigencia_promo = $Promocion->fecha_vigencia;
         $this->estatus_promo = $Promocion->estatus;
+        $this->hora_inicio_promo = $Promocion->hora_inicio;
+        $this->hora_fin_promo = $Promocion->hora_fin;
+        $this->dias_aplicables_promo = json_decode($Promocion->dias_aplicables, true) ?? [];
         $this->showEditModal = true; // Mostrar el modal de edición
     }
 
@@ -54,6 +66,9 @@ class TablaPromociones extends Component
         $Promocion->imagen = $this->img_promo;
         $Promocion->fecha_vigencia = $this->fecha_vigencia_promo;
         $Promocion->estatus = $this->estatus_promo;
+        $Promocion->hora_inicio = $this->hora_inicio_promo;
+        $Promocion->hora_fin = $this->hora_fin_promo;
+        // $Promocion->dias_aplicables = json_encode($this->dias_aplicables); // Asegúrate de tener esta columna en la base de datos
         $Promocion->save();
 
         session()->flash('success', 'Promocion actualizada correctamente.');

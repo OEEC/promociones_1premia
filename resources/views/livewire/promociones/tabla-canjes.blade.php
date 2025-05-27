@@ -1,9 +1,9 @@
 <div>
  <h3 class="color-encabezado"><b><i class="bi bi-card-checklist"></i> Promociones canjeadas</b></h3>
+   <h5 class="color-encabezado">Cliente: {{$cliente->persona->nombre_completo }}</h5>
     @if (Count($promocionesCanjeadas) == 0)
         <p>No hay promociones canjeadas.</p>
     @else
-     <h5 class="color-encabezado">Cliente: {{$cliente->persona->nombre_completo }}</h5>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
