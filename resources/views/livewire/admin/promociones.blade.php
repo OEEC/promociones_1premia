@@ -40,7 +40,37 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Crear Tiendas</button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label class="form-label"><i class="bi bi-calendar-check"></i> Días aplicables:</label>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach($diasSemana as $dia)
+                            <div class="form-check">
+                                <input type="checkbox" id="dia-{{ $dia }}" value="{{ $dia }}" wire:model="dias_aplicables" class="form-check-input">
+                                <label class="form-check-label" for="dia-{{ $dia }}">{{ $dia }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                    @error('dias_aplicables') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="hora_inicio" class="form-label"><i class="bi bi-clock"></i> Hora de inicio:</label>
+                    <input type="time" class="form-control" id="hora_inicio" wire:model="hora_inicio">
+                    @error('hora_inicio') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+            </div>  
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="hora_fin" class="form-label"><i class="bi bi-clock-fill"></i> Hora de fin:</label>
+                    <input type="time" class="form-control" id="hora_fin" wire:model="hora_fin">
+                    @error('hora_fin') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Registrar Promocion</button>
     </form>
     <hr>
     
