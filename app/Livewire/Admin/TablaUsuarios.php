@@ -57,7 +57,7 @@ class TablaUsuarios extends Component
     {
         if($this->new_password != ''){
             $this->validate([
-                'password' => 'required|min:8'
+                'new_password' => 'required|min:8'
             ]);
 
         }

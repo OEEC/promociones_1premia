@@ -68,7 +68,7 @@ class TablaPromociones extends Component
         $Promocion->estatus = $this->estatus_promo;
         $Promocion->hora_inicio = $this->hora_inicio_promo;
         $Promocion->hora_fin = $this->hora_fin_promo;
-        // $Promocion->dias_aplicables = json_encode($this->dias_aplicables); // Asegúrate de tener esta columna en la base de datos
+        $Promocion->dias_aplicables = json_encode($this->dias_aplicables_promo); // Asegúrate de tener esta columna en la base de datos
         $Promocion->save();
 
         session()->flash('success', 'Promocion actualizada correctamente.');

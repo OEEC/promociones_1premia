@@ -10,6 +10,8 @@
                     <th class="bg-dark text-white" scope="col">Promocion</th>
                     <th class="bg-dark text-white" scope="col">Fecha Vigencia</th>
                     <th class="bg-dark text-white" scope="col">Estatus vigencia</th>
+                    <th class="bg-dark text-white" scope="col">Dias valida</th>
+                    <th class="bg-dark text-white" scope="col">Horario</th>
                     <th class="bg-dark text-white" scope="col">Estatus Promocion</th>
                 </tr>
             </thead>
@@ -31,6 +33,20 @@
                             @else
                                 <span class="text-danger">N/A</span>
                             @endif
+                        </td>
+                        <td>
+                            @php
+                                $dias = json_decode($promo->dias_aplicables, true);
+                            @endphp
+
+                            @if (!empty($dias))
+                                {{ implode(', ', $dias) }}
+                            @else
+                                Sin dias aplicables
+                            @endif
+                        </td>
+                        <td>{{ $promo->hora_inicio ? \Carbon\Carbon::parse($promo->hora_inicio)->format('H:i') : '' }} - 
+                            {{ $promo->hora_fin ?\Carbon\Carbon::parse($promo->hora_fin)->format('H:i') : ''  }}
                         </td>
                         <td>{{ $promo->estatus ? 'Activa' : 'Inhabilitada' }}</td>
                     </tr>

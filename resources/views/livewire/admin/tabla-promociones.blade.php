@@ -46,7 +46,8 @@
                         @endif
                     </td>
                     <td>{{ $promocion->hora_inicio ? \Carbon\Carbon::parse($promocion->hora_inicio)->format('H:i') : '' }} - 
-                        {{ $promocion->hora_fin ?\Carbon\Carbon::parse($promocion->hora_fin)->format('H:i') : ''  }}</td>
+                        {{ $promocion->hora_fin ?\Carbon\Carbon::parse($promocion->hora_fin)->format('H:i') : ''  }}
+                    </td>
                     <td>
                         @if ($promocion->trashed())
                             <button wire:click="restaurarPromocion({{ $promocion->id }})" class="btn btn-success btn-sm">
@@ -112,10 +113,13 @@
                             <div class="d-flex flex-wrap gap-2">
                                 @foreach($diasSemana as $dia)
                                     <div class="form-check">
-                                        @if ()
-                                            
-                                        @endif
-                                        <input type="checkbox" id="dia-{{ $dia }}" value="{{ $dia }}" wire:model="dias_aplicables" class="form-check-input">
+                                        <input
+                                            type="checkbox"
+                                            id="dia-{{ $dia }}"
+                                            value="{{ $dia }}"
+                                            wire:model="dias_aplicables_promo"
+                                            class="form-check-input"
+                                        >
                                         <label class="form-check-label" for="dia-{{ $dia }}">{{ $dia }}</label>
                                     </div>
                                 @endforeach

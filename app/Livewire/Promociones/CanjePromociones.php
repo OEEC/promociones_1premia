@@ -8,6 +8,8 @@ use App\Models\Cliente;
 use App\Models\Promocion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Carbon;
+
 
 class CanjePromociones extends Component
 {
@@ -39,13 +41,13 @@ class CanjePromociones extends Component
             if (is_null($cliente)) {
                 try {
                    
-                    $response = Http::withoutVerifying()->post('https://1premia-dev.com.mx/progleal/getAllClientes.php', [
+                    $response = Http::withoutVerifying()->post('https://1premia.com.mx/progleal/getAllClientes.php', [
                         '_token' => '8df0a539612e1c0fb99ffd737afeaf4a',
                         '_tar_numero' => $this->noTarjeta,
                     ]);
     
                     $datos = $response->json();
-                    
+                    dd($datos);
                     if (!is_array($datos)) {
                         session()->flash('error', 'Error al obtener datos del cliente.');
                         return;
@@ -125,6 +127,18 @@ class CanjePromociones extends Component
         if ($this->promocionSeleccionada == null or $this->promocionSeleccionada == '') {
             session()->flash('error', 'Promocion no seleccionada.');
             return;
+        } else {
+            $promocion = Promocion::find($this->promocionSeleccionada);
+
+            if($promocion->hora_inicio != null){
+                $horaActual = Carbon::now()->format('H:i');
+                if ($horaActual < $promocion->hora_inicio && $horaActual > $promocion->hora_fin) {
+                    $h_inicio = Carbon::parse($promocion->hora_inicio)->format('H:i');
+                    $h_fin = Carbon::parse($promocion->hora_fin)->format('H:i');
+                    session()->flash('error', 'La promoción '.$promocion->nombre.' solo es valida en el horario de '.$h_inicio.' a '.$h_fin);
+                    return;
+                }   
+            }
         }
 
         $canje = new Canje();
@@ -146,7 +160,13 @@ class CanjePromociones extends Component
     // Obtiene promociones activas
     public function promocionesActivas()
     {
-        $this->promocionesActivas = Promocion::where('fecha_vigencia', '>=', now())->get();
+    $actualDate = now();
+    $diaActual = Carbon::now()->locale('es')->dayName; // "lunes", "martes", etc.
+    $diaActual = ucfirst($diaActual); // para que coincida con "Lunes", "Martes", etc.
+
+    $this->promocionesActivas = Promocion::where('fecha_vigencia', '>=', $actualDate)
+        ->whereJsonContains('dias_aplicables', $diaActual)
+        ->get();
     }
 
     public function render()
