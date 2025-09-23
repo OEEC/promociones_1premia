@@ -61,7 +61,7 @@
     </ul>
     @endif
 @endauth
-    <div class="container mt-4">
+    <div class="m-4">
         @yield('content')
     </div>
     <!-- Bootstrap JS (CDN) -->

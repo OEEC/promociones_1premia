@@ -17,12 +17,26 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'Oescobar',
+        $userId = DB::table('users')->insertGetId([
+            'name' => 'admin',
             'email' => 'innovacion3@gasamigas.com',
             'password' => Hash::make('123456789'),
             'created_at' => Carbon::now(),
-            'estatus' =>  1,
+            'estatus' => 1,
+            'role' => 0,
+        ]);
+
+        $personaId = DB::table('personas')->insertGetId([
+            'nombre_completo' => 'Administrador',
+            'fecha_nacimiento' => Carbon::now(),
+            'cp' => '00000',
+        ]);
+
+        DB::table('empleados')->insert([
+            'persona_id' => $personaId,
+            'user_id' => $userId,
+            'tienda_id' => 0, // Considera usar null si no aplica
+            'estatus' => 1,
         ]);
     }
 }

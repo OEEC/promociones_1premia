@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    '1premia' => [
+        'token' => env('PREMIAS_API_TOKEN'),
+        'url' => env('PREMIAS_API_URL'),
+    ],
+
 ];

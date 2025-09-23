@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Canje;
 use App\Models\Cliente;
 use App\Models\Promocion;
+use App\Models\Persona;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Carbon;
@@ -40,14 +41,17 @@ class CanjePromociones extends Component
             // Si no existe, buscar en API externa
             if (is_null($cliente)) {
                 try {
-                   
-                    $response = Http::withoutVerifying()->post('https://1premia.com.mx/progleal/getAllClientes.php', [
-                        '_token' => '8df0a539612e1c0fb99ffd737afeaf4a',
+                    // Llamada a la API de 1premia
+                    $apiToken = config('services.1premia.token');
+                    $apiUrl = config('services.1premia.url');
+
+                    $response = Http::withoutVerifying()->post($apiUrl, [
+                        '_token' => $apiToken,
                         '_tar_numero' => $this->noTarjeta,
                     ]);
     
                     $datos = $response->json();
-                    dd($datos);
+
                     if (!is_array($datos)) {
                         session()->flash('error', 'Error al obtener datos del cliente.');
                         return;
@@ -62,7 +66,7 @@ class CanjePromociones extends Component
                         $info = $datos[0];
     
                         // Crear persona
-                        $persona = new \App\Models\Persona();
+                        $persona = new Persona();
                         $persona->nombre_completo = $info['cte_nombre_completo'];
                         $persona->telefono = $info['cte_telefono'];
                         $persona->correo = $info['cte_email'];
@@ -160,13 +164,13 @@ class CanjePromociones extends Component
     // Obtiene promociones activas
     public function promocionesActivas()
     {
-    $actualDate = now();
-    $diaActual = Carbon::now()->locale('es')->dayName; // "lunes", "martes", etc.
-    $diaActual = ucfirst($diaActual); // para que coincida con "Lunes", "Martes", etc.
+        $actualDate = now();
+        $diaActual = Carbon::now()->locale('es')->dayName; // "lunes", "martes", etc.
+        $diaActual = ucfirst($diaActual); // para que coincida con "Lunes", "Martes", etc.
 
-    $this->promocionesActivas = Promocion::where('fecha_vigencia', '>=', $actualDate)
-        ->whereJsonContains('dias_aplicables', $diaActual)
-        ->get();
+        $this->promocionesActivas = Promocion::where('fecha_vigencia', '>=', $actualDate)
+            ->whereJsonContains('dias_aplicables', $diaActual)
+            ->get();
     }
 
     public function render()

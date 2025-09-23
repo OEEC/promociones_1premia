@@ -47,8 +47,8 @@ class TablaUsuarios extends Component
         $this->new_password = ''; // Limpiar el campo de contraseña
         $this->nombre = $usuario->name;
         $this->correo = $usuario->email;
-        $this->nombreCompleto = $usuario->empleado->persona->nombre_completo ?? '';
-        $this->tienda_id = $usuario->empleado->tienda_id ?? '';
+        $this->nombreCompleto = optional(optional($usuario->empleado)->persona)->nombre_completo ?? '';
+        $this->tienda_id = optional($usuario->empleado)->tienda_id ?? '';
         $this->role = $usuario->role;
         $this->showEditModal = true; // Mostrar el modal de edición
     }
@@ -59,11 +59,12 @@ class TablaUsuarios extends Component
             $this->validate([
                 'new_password' => 'required|min:8'
             ]);
-
         }
+
         $this->validate([
             'nombre' => 'required|string|max:255',
             'nombreCompleto' => 'required|string|max:255',
+            'tienda_id' => 'required|int',
         ]);
 
         $usuario = User::findOrFail($this->userId);
@@ -94,7 +95,9 @@ class TablaUsuarios extends Component
     public function render()
     {
         return view('livewire.admin.tabla-usuarios', [
-            'usuarios' => User::withTrashed()->paginate(10) // Carga usuarios con SoftDeletes
+            'usuarios' => User::withTrashed() // Carga usuarios con SoftDeletes
+             ->with(['empleado.persona', 'empleado.tienda']) // Carga las relaciones
+            ->paginate(10) 
         ]);
     }
 }
