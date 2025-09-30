@@ -5,12 +5,14 @@ namespace App\Livewire\Admin;
 use Livewire\Component;
 use App\Models\Promocion;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 class TablaPromociones extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
-    public $promocionId, $nombre_promo, $img_promo, $fecha_vigencia_promo, $estatus_promo, $hora_inicio_promo, $hora_fin_promo, $dias_aplicables_promo;
+    public $promocionId, $nombre_promo, $img_promo, $fecha_vigencia_promo, $estatus_promo, $hora_inicio_promo, $hora_fin_promo, $dias_aplicables_promo,$img_actual_promo;
     public $showEditModal = false;
     public $diasSemana = [
         'Lunes',
@@ -45,7 +47,7 @@ class TablaPromociones extends Component
         $Promocion = Promocion::findOrFail($id);
         $this->promocionId = $Promocion->id;
         $this->nombre_promo = $Promocion->nombre;
-        $this->img_promo = $Promocion->imagen;
+        $this->img_actual_promo = $Promocion->imagen;
         $this->fecha_vigencia_promo = $Promocion->fecha_vigencia;
         $this->estatus_promo = $Promocion->estatus;
         $this->hora_inicio_promo = $Promocion->hora_inicio;
@@ -58,23 +60,38 @@ class TablaPromociones extends Component
     {
         $this->validate([
             'nombre_promo' => 'required|string|max:255',
-            'fecha_vigencia_promo' => 'required|date|after_or_equal:today',
+            'fecha_vigencia_promo' => 'required|date',
+            'dias_aplicables_promo' => 'required|array|min:1',
+            'img_promo' => 'nullable|image|max:2048',
         ]);
 
         $Promocion = Promocion::findOrFail($this->promocionId);
+
+        // Manejo de la imagen
+        if ($this->img_promo) {
+            // Eliminar imagen anterior si existe
+            if ($Promocion->imagen && Storage::disk('public')->exists($Promocion->imagen)) {
+                Storage::disk('public')->delete($Promocion->imagen);
+            }
+
+            // Guardar nueva imagen
+            $rutaImagen = $this->img_promo->store('promociones', 'public');
+            $Promocion->imagen = $rutaImagen;
+        }
+
+        // Actualizar los demás campos
         $Promocion->nombre = $this->nombre_promo;
-        $Promocion->imagen = $this->img_promo;
         $Promocion->fecha_vigencia = $this->fecha_vigencia_promo;
         $Promocion->estatus = $this->estatus_promo;
         $Promocion->hora_inicio = $this->hora_inicio_promo;
         $Promocion->hora_fin = $this->hora_fin_promo;
-        $Promocion->dias_aplicables = json_encode($this->dias_aplicables_promo); // Asegúrate de tener esta columna en la base de datos
+        $Promocion->dias_aplicables = json_encode($this->dias_aplicables_promo);
+        
         $Promocion->save();
 
-        session()->flash('success', 'Promocion actualizada correctamente.');
-        $this->reset(['showEditModal', 'promocionId', 'nombre_promo', 'img_promo']); // Resetear datos
+        session()->flash('success', 'Promoción actualizada correctamente.');
+        $this->reset(['showEditModal', 'promocionId', 'nombre_promo', 'img_promo', 'img_actual_promo']);
     }
-
     public function render()
     {
         return view('livewire.admin.tabla-promociones', [

@@ -8,6 +8,7 @@
                 <tr>
                     <th class="bg-dark text-white" scope="col">#</th>
                     <th class="bg-dark text-white" scope="col">Promocion</th>
+                    <th class="bg-dark text-white" scope="col">Imagen</th>
                     <th class="bg-dark text-white" scope="col">Fecha Vigencia</th>
                     <th class="bg-dark text-white" scope="col">Estatus vigencia</th>
                     <th class="bg-dark text-white" scope="col">Dias valida</th>
@@ -20,6 +21,17 @@
                     <tr>
                         <th scope="row">{{ $loop->index + 1 }}</th>
                         <td>{{ $promo->nombre }}</td>
+                        <td class="promo-td">
+                                @if($promo->imagen)
+                                    <a href="{{ asset('storage/' . $promo->imagen) }}" target="_blank">
+                                        <img src="{{ asset('storage/' . $promo->imagen) }}" 
+                                            alt="Imagen de {{ $promo->nombre }}" 
+                                            class="promo-img-thumb">
+                                    </a>
+                                @else
+                                    <span class="text-muted">Sin imagen</span>
+                                @endif
+                        </td>
                         <td>{{ $promo->fecha_vigencia }}</td>
                         <td>
                             @if($promo?->fecha_vigencia)

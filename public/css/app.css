@@ -938,6 +938,14 @@
             color: white;
         }
 
+        .promo-img-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover; /* recorta sin deformar */
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .crud-promo-table {
