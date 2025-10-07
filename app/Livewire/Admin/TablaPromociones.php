@@ -15,13 +15,13 @@ class TablaPromociones extends Component
     public $promocionId, $nombre_promo, $img_promo, $fecha_vigencia_promo, $estatus_promo, $hora_inicio_promo, $hora_fin_promo, $dias_aplicables_promo,$img_actual_promo;
     public $showEditModal = false;
     public $diasSemana = [
-        'Lunes',
-        'Martes',
-        'Miércoles',
-        'Jueves',
-        'Viernes',
-        'Sábado',
-        'Domingo',
+        'Lunes' => 'Lunes',
+        'Martes' => 'Martes',
+        'Miercoles' => 'Miércoles',
+        'Jueves' => 'Jueves',
+        'Viernes' => 'Viernes',
+        'Sabado' => 'Sábado',
+        'Domingo' => 'Domingo',
     ];
 
     protected $listeners = ['refreshTablaPromociones' => '$refresh'];

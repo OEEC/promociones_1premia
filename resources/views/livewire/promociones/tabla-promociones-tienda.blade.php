@@ -3,17 +3,18 @@
     @if ($promociones->isEmpty())
         <p>No hay promociones</p>
     @else
-        <table class="table">
-            <thead class="thead-dark">
+     <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
                 <tr>
-                    <th class="bg-dark text-white" scope="col">#</th>
-                    <th class="bg-dark text-white" scope="col">Promocion</th>
-                    <th class="bg-dark text-white" scope="col">Imagen</th>
-                    <th class="bg-dark text-white" scope="col">Fecha Vigencia</th>
-                    <th class="bg-dark text-white" scope="col">Estatus vigencia</th>
-                    <th class="bg-dark text-white" scope="col">Dias valida</th>
-                    <th class="bg-dark text-white" scope="col">Horario</th>
-                    <th class="bg-dark text-white" scope="col">Estatus Promocion</th>
+                    <th>#</th>
+                    <th>Promocion</th>
+                    <th>Imagen</th>
+                    <th>Fecha Vigencia</th>
+                    <th>Estatus vigencia</th>
+                    <th>Dias valida</th>
+                    <th>Horario</th>
+                    <th>Estatus Promocion</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,7 +53,7 @@
                             @endphp
 
                             @if (!empty($dias))
-                                {{ implode(', ', $dias) }}
+                                {{ implode(', ', array_map(fn($d) => $diasSemana[$d] ?? $d, $dias)) }}
                             @else
                                 Sin dias aplicables
                             @endif
@@ -65,5 +66,6 @@
                 @endforeach
             </tbody>
         </table>
+     </div>
     @endif
 </div>

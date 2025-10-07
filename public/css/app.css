@@ -1257,6 +1257,86 @@
             backdrop-filter: blur(3px);
         }
 
+/* Encapsulado para el módulo de promociones */
+.promociones-module {
+    color: var(--text-light);
+}
+
+/* Tarjetas */
+.promociones-module .card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    background: #2b2b2b; /* gris oscuro en lugar de blanco */
+    color: var(--text-light);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.promociones-module .card-header {
+    border-top-left-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
+    background: var(--primary);
+    color: var(--text-light);
+}
+
+/* Formularios */
+.promociones-module .form-control,
+.promociones-module input::placeholder,
+.promociones-module textarea::placeholder,
+.promociones-module select {
+    color: var(--text-light);
+}
+
+.promociones-module .form-control,
+.promociones-module select {
+    background: #3a3a3a;
+    border: 1px solid #555;
+    color: var(--text-light);
+}
+
+.promociones-module .form-control:focus,
+.promociones-module select:focus {
+    background: #444;
+    border-color: var(--primary);
+    box-shadow: none;
+    color: var(--text-light);
+}
+
+/* Botones */
+.promociones-module .btn-primary {
+    background: var(--primary);
+    border: none;
+}
+
+.promociones-module .btn-success {
+    background: var(--success);
+    border: none;
+}
+
+.promociones-module .btn:hover {
+    opacity: 0.9;
+}
+
+/* Tablas */
+.promociones-module .table {
+    background: #2e2e2e;
+    color: var(--text-light);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.promociones-module .table thead th {
+    background: var(--fourth); /* rojo oscuro */
+    color: var(--text-light);
+    text-align: center;
+}
+
+.promociones-module .table tbody tr {
+    border-bottom: 1px solid #444;
+}
+
+.promociones-module .table tbody tr:hover {
+    background-color: rgba(202, 0, 0, 0.2);
+}
         /* Responsive */
         @media (max-width: 768px) {
             .promo-modal-container .modal-dialog {

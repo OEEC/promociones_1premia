@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <livewire:promociones.historial-tienda />
+    <div class="promociones-module">
+        <livewire:promociones.historial-tienda />
+    </div>
 @endsection

@@ -10,7 +10,7 @@ use App\Models\Persona;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Str;
 
 class CanjePromociones extends Component
 {
@@ -164,12 +164,28 @@ class CanjePromociones extends Component
     // Obtiene promociones activas
     public function promocionesActivas()
     {
-        $actualDate = now();
-        $diaActual = Carbon::now()->locale('es')->dayName; // "lunes", "martes", etc.
-        $diaActual = ucfirst($diaActual); // para que coincida con "Lunes", "Martes", etc.
+    $actualDate = now();
+
+    // Nombre del día actual en español normalizado
+    $diaActual = Carbon::now()->locale('es')->dayName; // Ejemplo: "sábado"
+    $diaActual = ucfirst($diaActual); // "Sábado"
+
+    // Forzar formato correcto (por si el locale no maneja acentos)
+    $mapaDias = [
+        'Lunes' => 'Lunes',
+        'Martes' => 'Martes',
+        'Miercoles' => 'Miércoles',
+        'Jueves' => 'Jueves',
+        'Viernes' => 'Viernes',
+        'Sabado' => 'Sábado',
+        'Domingo' => 'Domingo',
+    ];
+
+    $diaActualSinAcento = Str::ucfirst(Str::ascii($diaActual)); // Ej. "Sabado"
+    $diaBuscado = $mapaDias[$diaActualSinAcento] ?? $diaActual;
 
         $this->promocionesActivas = Promocion::where('fecha_vigencia', '>=', $actualDate)
-            ->whereJsonContains('dias_aplicables', $diaActual)
+            ->whereJsonContains('dias_aplicables', $diaBuscado)
             ->get();
     }
 

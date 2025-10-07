@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <livewire:promociones.promociones-tienda />
+    <div class="promociones-module">
+        <livewire:promociones.promociones-tienda />
+    </div>
 @endsection

@@ -14,13 +14,13 @@ class Promociones extends Component
     public $nombre, $imagen, $fecha_vigencia, $estatus = 1, $hora_inicio, $hora_fin;
     public $dias_aplicables = [];
     public $diasSemana = [
-        'Lunes',
-        'Martes',
-        'Miércoles',
-        'Jueves',
-        'Viernes',
-        'Sábado',
-        'Domingo',
+        'Lunes' => 'Lunes',
+        'Martes' => 'Martes',
+        'Miércoles' => 'Miercoles',
+        'Jueves' => 'Jueves',
+        'Viernes' => 'Viernes',
+        'Sábado' => 'Sabado',
+        'Domingo' => 'Domingo',
     ];
 
     protected $rules = [

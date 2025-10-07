@@ -16,8 +16,10 @@
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Filtrar</button>
-            <button type="button" wire:click="limpiarFiltros" class="btn btn-secondary"><i class="bi bi-x-octagon"></i> Limpiar</button>
+            <div class="pt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Filtrar</button>
+                <button type="button" wire:click="limpiarFiltros" class="btn btn-secondary"><i class="bi bi-x-octagon"></i> Limpiar</button>
+            </div>
         </form>
     </div>
     @livewire('promociones.tabla-promociones-tienda')

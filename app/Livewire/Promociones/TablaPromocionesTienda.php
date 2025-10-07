@@ -13,6 +13,16 @@ class TablaPromocionesTienda extends Component
     public $estatus;
     public $promocion;
     public $promociones = [];
+        public $diasSemana = [
+        'Lunes' => 'Lunes',
+        'Martes' => 'Martes',
+        'Miercoles' => 'Miércoles',
+        'Jueves' => 'Jueves',
+        'Viernes' => 'Viernes',
+        'Sabado' => 'Sábado',
+        'Domingo' => 'Domingo',
+    ];
+
 
 
     public function mount()

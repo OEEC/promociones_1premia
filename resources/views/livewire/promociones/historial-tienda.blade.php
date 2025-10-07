@@ -34,15 +34,6 @@
                     <label for="empleado"><i class="bi bi-person-badge-fill"></i> Empleado:</label>
                     <input type="text" id="empleado" wire:model.defer="empleado" class="form-control" placeholder="Empleado">
                 </div>
-                {{-- <div class="form-group col-md-3">
-                    <label for="tienda">Tienda:</label>
-                    <select class="form-select" id="tienda" wire:model.defer="tienda" aria-label="Tienda">
-                    <option selected value="0">Tiendas</option>
-                    @foreach ( $tiendas as $tienda )
-                        <option value="{{$tienda->id}}">{{$tienda->nombre}}</option>
-                    @endforeach
-                    </select>
-                </div> --}}
             </div>
             <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Filtrar</button>
             <button type="button" wire:click="limpiarFiltros" class="btn btn-secondary"><i class="bi bi-x-octagon"></i> Limpiar</button>

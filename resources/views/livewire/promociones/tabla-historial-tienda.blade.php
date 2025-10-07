@@ -3,16 +3,17 @@
     @if ($promocionesCanjeadas->isEmpty())
         <p>No hay promociones canjeadas.</p>
     @else
-        <table class="table">
-            <thead class="thead-dark">
+     <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
                 <tr>
-                    <th class="bg-dark text-white" scope="col">#</th>
-                    <th class="bg-dark text-white" scope="col">Fecha de Canje</th>
-                    <th class="bg-dark text-white" scope="col">No Tarjeta</th>
-                    <th class="bg-dark text-white" scope="col">Nombre Cliente</th>
-                    <th class="bg-dark text-white" scope="col">Promoción</th>
-                    <th class="bg-dark text-white" scope="col">Empleado</th>
-                    <th class="bg-dark text-white" scope="col">Tienda</th>
+                    <th>#</th>
+                    <th>Fecha de Canje</th>
+                    <th>No Tarjeta</th>
+                    <th>Nombre Cliente</th>
+                    <th>Promoción</th>
+                    <th>Empleado</th>
+                    <th>Tienda</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,5 +30,12 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+    <div class="mt-3">
+        @if($promocionesCanjeadas->hasPages())
+            {{ $promocionesCanjeadas->links() }} <!-- 👈 Esto genera la paginación -->
+        @endif
+    </div>
     @endif
 </div>

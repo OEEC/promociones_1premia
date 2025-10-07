@@ -58,7 +58,7 @@
                             @endphp
 
                             @if (!empty($dias))
-                                {{ implode(', ', $dias) }}
+                                {{ implode(', ', array_map(fn($d) => $diasSemana[$d] ?? $d, $dias)) }}
                             @else
                                 Sin dias aplicables
                             @endif
@@ -126,7 +126,8 @@
                                         <p class="text-muted">Imagen actual:</p>
                                         <img src="{{ asset('storage/' . $img_actual_promo) }}" 
                                             alt="Imagen actual de {{ $nombre_promo }}" 
-                                            class="promo-img-preview">
+                                            class="promo-img-preview"
+                                            width="50%" height="75%">
                                     </div>
                                 @endif
 
@@ -135,8 +136,8 @@
                                     <div class="mb-2">
                                         <p class="text-muted">Nueva imagen (preview):</p>
                                         <img src="{{ $img_promo->temporaryUrl() }}" 
-                                            alt="Preview nueva imagen" 
-                                            class="promo-img-preview">
+                                            alt="Preview nueva imagen"
+                                            width="50%" height="75%">
                                     </div>
                                 @endif
 
@@ -167,9 +168,9 @@
                                     <i class="bi bi-calendar-check"></i> Días aplicables:
                                 </label>
                                 <div class="promo-checkbox-group">
-                                    @foreach($diasSemana as $dia)
+                                    @foreach($diasSemana as $key => $dia)
                                         <label class="promo-form-check">
-                                            <input type="checkbox" id="dia-{{ $dia }}" value="{{ $dia }}" wire:model="dias_aplicables_promo" class="promo-form-check-input">
+                                            <input type="checkbox" id="dia-{{ $dia }}" value="{{ $key }}" wire:model="dias_aplicables_promo" class="promo-form-check-input">
                                             <span class="promo-checkmark"></span>
                                             <span class="promo-form-check-label">{{ $dia }}</span>
                                         </label>

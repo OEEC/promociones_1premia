@@ -6,9 +6,11 @@ use Livewire\Component;
 use App\Models\Canje;
 use App\Models\Cliente;
 use Livewire\Attributes\On; 
-
+use Livewire\WithPagination;
 class TablaHistorialTienda extends Component
 {
+    use WithPagination;
+
     public $fecha_inicio;
     public $fecha_fin;
     public $no_tarjeta;
@@ -16,12 +18,7 @@ class TablaHistorialTienda extends Component
     public $promocion;
     public $empleado;
     public $tienda;
-    public $promocionesCanjeadas = [];
 
-    public function mount()
-    {
-        $this->cargarPromocionesCanjeadas();
-    }
 
     #[On('filtrarTabla')]
     public function actualizarFiltros($filtros)
@@ -33,18 +30,17 @@ class TablaHistorialTienda extends Component
         $this->promocion = $filtros['promocion'];
         $this->empleado = $filtros['empleado'];
         $this->tienda = $filtros['tienda'];
-        $this->cargarPromocionesCanjeadas();
+        $this->resetPage();
     }
 
+    // 6. Crear un método para la consulta paginada
     public function cargarPromocionesCanjeadas()
     {
         $query = Canje::query();
+        
         if ($this->fecha_inicio && $this->fecha_fin) {
-            // dd($this->fecha_inicio);
-            $inicio = $this->fecha_inicio;
-            $inicio = $inicio." 00:00:00";
-            $fin = $this->fecha_fin;
-            $fin = $fin." 23:59:59";
+            $inicio = $this->fecha_inicio . " 00:00:00";
+            $fin = $this->fecha_fin . " 23:59:59";
             $query->whereBetween('created_at', [$inicio, $fin]);
         } elseif ($this->fecha_inicio) {
             $query->whereDate('created_at', '>=', $this->fecha_inicio);
@@ -52,7 +48,7 @@ class TablaHistorialTienda extends Component
             $query->whereDate('created_at', '<=', $this->fecha_fin);
         }
 
-        if ($this->no_tarjeta) {
+                if ($this->no_tarjeta) {
             $query->whereHas('cliente', function ($q) {
                 $q->where('no_tarjeta', 'like', '%' . $this->no_tarjeta . '%');
             });
@@ -77,18 +73,22 @@ class TablaHistorialTienda extends Component
         if ($this->tienda != 0) {
             $query->where('tienda_id', $this->tienda);
         }
-
-        $this->promocionesCanjeadas = $query->with(['promocion', 'empleado.persona', 'tienda', 'cliente.persona'])->orderBy('created_at', 'desc')->get();
+        return $query->with(['promocion', 'empleado.persona', 'tienda', 'cliente.persona'])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
     }
 
     public function limpiarFiltros()
     {
-        $this->reset(['created_at', 'no_tarjeta', 'nombre_cliente', 'promocion', 'empleado', 'tienda']);
-        $this->cargarPromocionesCanjeadas();
+        $this->reset(['fecha_inicio', 'fecha_fin', 'no_tarjeta', 'nombre_cliente', 'promocion', 'empleado', 'tienda']);
+        $this->resetPage();
     }
     
     public function render()
     {
-        return view('livewire.promociones.tabla-historial-tienda');
+        // 9. Pasar los resultados paginados a la vista
+        return view('livewire.promociones.tabla-historial-tienda', [
+            'promocionesCanjeadas' => $this->cargarPromocionesCanjeadas(),
+        ]);
     }
 }

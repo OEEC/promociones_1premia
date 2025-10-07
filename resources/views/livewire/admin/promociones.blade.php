@@ -61,11 +61,11 @@
                             <i class="bi bi-calendar-check"></i> Días aplicables:
                         </label>
                         <div class="crud-checkbox-group">
-                            @foreach($diasSemana as $dia)
+                            @foreach ($diasSemana as $diaVisual => $diaValor)
                                 <label class="crud-form-check">
-                                    <input type="checkbox" value="{{ $dia }}" wire:model="dias_aplicables" class="crud-form-check-input">
+                                    <input type="checkbox" wire:model="dias_aplicables" value="{{ $diaValor }}" class="crud-form-check-input">
                                     <span class="crud-checkmark"></span>
-                                    <span class="crud-form-check-label">{{ $dia }}</span>
+                                    <span class="crud-form-check-label">{{ $diaVisual }}</span>
                                 </label>
                             @endforeach
                         </div>
