@@ -28,7 +28,7 @@ Route::get('/login', Login::class)->name('login')->middleware('guest');
 
 // Rutas protegidas para administradores (Role 0)
 Route::get('/administrador', function () {
-    return view('administrador');
+    return view('admin-dashboard');
 })->name('dashboard')->middleware(['auth', 'role:0']); // Middleware para administradores
 Route::get('/usuarios', function () {
     return view('admin-usuarios');
@@ -39,6 +39,13 @@ Route::get('/admin-tiendas', function () {
 Route::get('/admin-promociones', function () {
     return view('admin-promociones');
 })->name('admin-promociones')->middleware(['auth', 'role:0']); // Middleware para administradores
+Route::get('/admin-reportes', function () {
+    return view('admin-reportes');
+})->name('admin-reportes')->middleware(['auth', 'role:0']); // Middleware para administradores
+Route::get('/admin-dashboard', function () {
+    return view('admin-dashboard');
+})->name('admin-dashboard')->middleware(['auth', 'role:0']); // Middleware para administradores
+
 
 // Rutas protegidas para empleados (Role 1)
 Route::get('/tienda', function () {
@@ -46,7 +53,7 @@ Route::get('/tienda', function () {
 })->name('tienda')->middleware(['auth', 'role:1']); // Middleware para empleados
 Route::get('/historial-tienda', function () {
     return view('historial-tienda');
-})->name('historial-tienda')->middleware(['auth', 'role:1']);
+})->name('historial-tienda')->middleware(['auth', 'role:1']); // Middleware para empleados
 Route::get('/promociones-tienda', function () {
     return view('promociones-tienda');
 })->name('promociones-tienda')->middleware(['auth', 'role:1']); // Middleware para empleados

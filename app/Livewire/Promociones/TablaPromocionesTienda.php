@@ -23,8 +23,6 @@ class TablaPromocionesTienda extends Component
         'Domingo' => 'Domingo',
     ];
 
-
-
     public function mount()
     {
         $this->listaPromociones();
@@ -46,7 +44,7 @@ class TablaPromocionesTienda extends Component
         if ($this->promocion) {
             $query->where('nombre', 'like', '%' . $this->promocion . '%');
         }
-        //ESta como diferente a 2 porque los estatus son 0 inactivo y 1 activo
+        //Esta como diferente a 2 porque los estatus son 0 inactivo y 1 activo
         if ($this->estatus != 2) {
             $query->where('estatus', $this->estatus);
         }

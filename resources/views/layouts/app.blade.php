@@ -38,6 +38,9 @@
     @if(auth()->user()->isAdmin())
     <ul class="nav nav-pills nav-fill bg-danger">
         <li class="nav-item">
+            <a class="nav-link active bg-danger text-white" aria-current="page" href="/admin-dashboard"><i class="bi bi-graph-up"></i> Inicio</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active bg-danger text-white" aria-current="page" href="/usuarios"><i class="bi bi-people-fill"></i> Usuarios</a>
         </li>
         <li class="nav-item">
@@ -45,6 +48,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link bg-danger text-white" href="/admin-promociones"><i class="bi bi-percent"></i> Promociones</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-danger text-white" href="/admin-reportes"><i class="bi bi-file-spreadsheet"></i> Reportes</a>
         </li>
     </ul>
     @elseif(auth()->user()->isUser())
@@ -66,8 +72,11 @@
     </div>
     <!-- Bootstrap JS (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- chartjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- Livewire Scripts -->
     @livewireScripts
+    @stack('scripts')
 </body>
 </html>
